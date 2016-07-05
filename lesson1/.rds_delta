@@ -1,0 +1,10 @@
+#delete
+#add
+res/wgt/js\rss_db.js
+res/wgt/rss_offline.html
+#modify
+res/wgt/author-signature.xml
+res/wgt/signature1.xml
+res/wgt/index.html
+res/wgt/js\rss.js
+res/wgt/rss.html
