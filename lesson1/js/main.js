@@ -1,40 +1,51 @@
 var startTime;
 var checkTime;
 
-//Initialize function
-var init = function () {
-	// TODO:: Do your initialization job
-	console.log("init() called");
-
-	// add eventListener for tizenhwkey
-	document.addEventListener('tizenhwkey', function(e) {
-		if(e.keyName == "back") {
-			try {
-				tizen.application.getCurrentApplication().exit();
-			} catch (error) {
-				console.error("getCurrentApplication(): " + error.message);
-			}
-		}
-	});
-};
-// window.onload can work without <body onload="">
-window.onload = init;
-
 function startTime() {
+	function pad(i) {
+		if (i < 10) {
+			i="0" + i;
+		}
+		return i;
+	}
 	var today = new Date();
 	var h = today.getHours();
 
 	var m = today.getMinutes();
 	var s = today.getSeconds();
-	m = checkTime(m);
-	s = checkTime(s);
+	m = pad(m);
+	s = pad(s);
 	document.getElementById('divbutton1').innerHTML="Current time: " + h + ":" + m + ":" + s;
 	var t = setTimeout(startTime, 250);
 }
 
-function checkTime(i) {
-	if (i < 10) {
-		i="0" + i;
-	}
-	return i;
-}
+
+( function () {
+    window.addEventListener( 'tizenhwkey', function( ev ) {
+        if( ev.keyName === "back" ) {
+            var activePopup = document.querySelector( '.ui-popup-active' ),
+                page = document.getElementsByClassName( 'ui-page-active' )[0],
+                pageid = page ? page.id : "";
+
+            if( pageid === "one" && !activePopup ) {
+                try {
+                    tizen.application.getCurrentApplication().exit();
+                } catch (ignore) {
+                }
+            } else {
+                window.history.back();
+            }
+        }
+    } );
+    
+    $('#btn_img').click(function() {
+        let vis = $('#image').css('visibility');
+    	$('#image').css('visibility', vis == 'hidden' ? 'visible' : 'hidden');
+    });
+    
+    $('#str1').css('color', 'red').css('font', '15px Georgia');
+    $('#str2').css('color', 'blue').css('font', '14px Arial');
+    $('#str3').css('color', 'gray').css('font', '13px Colibri');
+    $('#str4').css('color', 'green').css('font', '12px Times New Roman');
+    $('#str5').css('color', 'yellow').css('font', '11px Comic Sans MS');
+} () );
