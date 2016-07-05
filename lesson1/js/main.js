@@ -38,6 +38,22 @@ function startTime() {
         }
     } );
     
+    let pages = [['Home', 'one'],['Task1', 'two'],['jQuery', 'three'],['Video', 'four']];
+    let ul = document.createElement('ul');
+    for (let i = 0; i < pages.length; i++) {
+        let li = document.createElement('li');
+        li.class = 'ui-li-anchor';
+        let a = document.createElement('a');
+        a.href = '#' + pages[i][1];
+        a.innerHTML = pages[i][0];
+        li.appendChild(a);
+        ul.appendChild(li);
+        console.log(ul);
+    }
+    $('.menu_main').each(function() {
+    	$(this).innerHTML(ul);
+    });
+    
     $('#btn_img').click(function() {
         let vis = $('#image').css('visibility');
     	$('#image').css('visibility', vis == 'hidden' ? 'visible' : 'hidden');
